@@ -1,0 +1,150 @@
+﻿@model IEnumerable<BrewApp.DTOs.CustomerDTO>
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .AlignCenter{
+        text-align: center !important;
+    }
+    .AlignLeft{
+        text-align: left !important;
+    }
+    .AlignRight{
+        text-align: right !important;
+    }
+
+    .ColWidthL
+    {
+        width:200px !important;
+    }
+    .ColWidthM
+    {
+        width:100px !important;
+    }
+    .ColWidthS
+    {
+        width:20px !important;
+    }
+    .btnUpdate
+    {
+        width:130px;
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+    #btnUpdate {
+      cursor: pointer;
+      -webkit-appearance: button;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <h2>Customer Master</h2>
+
+    <th class="AlignCenter">@Html.ActionLink("Add Customer", "UpdateOrAdd", new { id = "" }, new { @class = "btn btnUpdate" })</th>
+
+    <table id="tblCustomers" class="table" style="width: max-content;">
+        <thead>
+            <tr>
+                <th class="ColWidthS"></th>
+                <th class="ColWidthS"></th>
+                <th class="AlignCenter ColWidthS">Customer ID</th>
+                <th class="AlignCenter ColWidthL">Name</th>
+                <th class="AlignCenter ColWidthL">Father's Name</th>
+                <th class="AlignCenter ColWidthL">Mother's Name</th>
+                <th class="AlignCenter ColWidthM">Phone No</th>
+                <th class="AlignCenter ColWidthL">Email</th>
+                <th class="AlignCenter ColWidthM">PAN</th>
+                <th class="AlignCenter ColWidthL">Current Address</th>
+                <th class="AlignCenter ColWidthL">Permanent Address</th>
+                @*<th class="AlignCenter ColWidthM">Date of Birth</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var item in Model)
+                {
+                    <tr>
+                        <th class="AlignCenter">@Html.ActionLink("Update", "UpdateOrAdd", new { id = item.CustomerID })</th>
+                        <td class="AlignCenter">@item.CustomerID</td>
+                        <td class="AlignLeft">@item.CustomerName</td>
+                        <td class="AlignLeft">@item.FatherName</td>
+                        <td class="AlignLeft">@item.MotherName</td>
+                        <td class="AlignLeft">@item.MobNo</td>
+                        <td class="AlignLeft">@item.Email</td>
+                        <td class="AlignLeft">@item.PAN</td>
+                        <td class="AlignLeft">@item.CurrentAddress</td>
+                        <td class="AlignLeft">@item.PermanentAddress</td>
+                        <td class="AlignCenter">@item.DOB.ToString("dd-MMM-yyyy").Replace("01-Jan-1900", "-")</td>
+                    </tr>
+                }*@
+        </tbody>
+    </table>
+
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+
+
+        $("#tblCustomers").DataTable({
+            ajax: {
+                url: "/BrewApp/api/CustomersAPI",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "customerID",
+                    render: function(data, type, customer){
+                        return "<a href='/BrewApp/Customers/UpdateOrAdd/" + data + "'>Update</a> ";
+                    }
+                },
+                {
+                    data: "customerID",
+                    render: function(data, type, customer){
+                        return "<button class='btn-link js-delete' data-customer-id= '" + data + "'>Delete</button> ";
+                    }
+                },
+                {data: "customerID"},
+                {data: "customerName"},
+                {data: "fatherName"},
+                {data: "motherName"},
+                {data: "mobNo"},
+                {data: "email"},
+                {data: "pan"},
+                {data: "currentAddress"},
+                { data: "permanentAddress" }
+                //,{data: "dob"}
+            ]
+
+
+        });
+        
+        $("#tblCustomers").on("click", ".js-delete", function () {
+
+            if (confirm("Are you sure you want to delete this record?"))
+            {
+                console.log("awesome");
+            
+                $.ajax({
+                    url: "/BreApp/api/CustomerAPI/" + $(this).attr("data-customer-id") + "",
+                    method: "DELETE",
+                    success: function () {
+                        console.log("Done");
+                    }
+                })
+            }
+        });
+
+
+    });
+</script>
+}
+  
+
+
+

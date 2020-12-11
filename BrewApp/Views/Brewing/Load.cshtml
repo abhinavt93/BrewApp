@@ -1,0 +1,401 @@
+﻿@model BrewApp.ViewModel.BrewingViewModel
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthML {
+        width: 150px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+
+    .ValidationSummaryHeight {
+        height: 30px;
+        padding-left: 10px;
+    }
+
+    .txtBoxWidthLeft {
+        width: 100px !important;
+        margin-right: 8px !important;
+    }
+
+    .txtBoxWidth {
+        width: 100px !important;
+    }
+
+    .txtBoxWidth1 {
+        width: 210px !important;
+    }
+
+    txtBoxWidth2 {
+        width: 80px !important;
+    }
+
+    .ddlWidth {
+        width: 210px !important;
+        padding-right:5px;
+    }
+
+
+    .lblWidth {
+        width: 145px !important;
+        padding-left: 14px !important;
+    }
+
+    .lblPaddingRightDiv{
+        width: 240px !important;
+        padding-left: 114px !important;
+    }
+
+    .tdWidth {
+        width: 120px;
+    }
+
+    .tblRecipeName {
+        border-bottom: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+    }
+
+    .txtBoxRecipeName {
+        width: 200px !important;
+    }
+
+    #tblRecipeData {
+        margin-top: 10px;
+    }
+
+    .btn {
+        width: 120px;
+        margin-left: 40px;
+        /*margin-top: 20px;*/
+    }
+    .lblWidth1 {
+        margin-left: 15px;
+    }
+
+    .lblWidth2 {
+        margin-left:15px;
+        width:130px !important;
+    }
+    .trHeight {
+        height:7px;
+    }
+</style>
+
+<h2>Brewing Entry</h2>
+
+@using (Html.BeginForm("Save", "Brewing", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+        <hr />
+        <table>
+            <tr style="margin-top:5px;">
+                @if (Model.BrewingModel.id == 0)
+                {
+                    <td>
+                        @Html.LabelFor(m => m.RecipeModel.RecipeName, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                    </td>
+
+                    <td>
+                        @Html.DropDownListFor(m => m.RecipeModel.Id, new SelectList(Model.RecipeModel.oRecipeMasterDTO, "id", "RecipeName"), "Select Ingredient", new { @class = "form-control ddlWidth", id = "ddlRecipeName", @onchange = "onReceipeChange()" })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.LabelFor(m => m.RecipeModel.RecipeName, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                    </td>
+
+                    <td>
+                        @Html.DropDownListFor(m => m.RecipeModel.Id, new SelectList(Model.RecipeModel.oRecipeMasterDTO, "id", "RecipeName"), "Select Ingredient", new {@readonly = "readonly", @class = "form-control ddlWidth", id = "ddlRecipeName", @onchange = "onReceipeChange()" })
+                    </td>
+                }
+                
+                <td>
+                    @Html.LabelFor(m => m.BrewingModel.id, new { @class = "col-md-2 control-label AlignLeft lblPaddingRightDiv" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.BrewingModel.id, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtBrewID" })
+                </td>
+            </tr>
+
+            <tr style="display:none">
+                <td>
+                    @Html.TextBoxFor(m => m.BrewingModel.Recipeid, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtRecipeid" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.BrewingModel.RecipeName, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtRecipeName" })
+                </td>
+            </tr>
+        
+        </table>
+        <br />
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Malt, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.MaltType, new { @readonly = "readonly", @class = "form-control txtBoxWidthLeft AlignRight", id = "txtMaltType" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.Malt, new { @readonly = "readonly", @class = "form-control txtBoxWidth AlignRight", id = "txtMalt" })
+                </td>
+           
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Hops, new { @class = "col-md-2 control-label AlignLeft lblPaddingRightDiv" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.HopsType, new { @readonly = "readonly", @class = "form-control txtBoxWidthLeft AlignRight", id = "txtHopsType" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.Hops, new { @readonly = "readonly", @class = "form-control txtBoxWidth AlignRight", id = "txtHops" })
+                </td>
+            </tr>
+            <tr class="trHeight"><td></td><td></td><td></td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Yeast, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.YeastType, new { @readonly = "readonly", @class = "form-control txtBoxWidthLeft AlignRight", id = "txtYeastType" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.RecipeModel.Yeast, new { @readonly = "readonly", @class = "form-control txtBoxWidth AlignRight", id = "txtYeast" })
+                </td>
+
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Water, new { @class = "col-md-2 control-label AlignLeft lblPaddingRightDiv" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.Water, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtWater" })
+                </td>
+            </tr>
+            <tr class="trHeight"><td></td><td></td><td></td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.OrangePeels, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.OrangePeels, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtOrangePeels" })
+                </td>
+
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Coriander, new { @class = "col-md-2 control-label AlignLeft lblWidth lblPaddingRightDiv" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.Coriander, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtCoriander" })
+                </td>
+            </tr>
+            <tr class="trHeight"><td></td><td></td><td></td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.FilterSheets, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.FilterSheets, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtFilterSheets" })
+                </td>
+
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.CleaningChemicals, new { @class = "col-md-2 control-label AlignLeft lblWidth lblPaddingRightDiv" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.CleaningChemicals, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtCleaningChemicals" })
+                </td>
+            </tr>
+            <tr class="trHeight"><td></td><td></td><td></td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Iodine, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.Iodine, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtIodine" })
+                </td>
+
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.Enzymes, new { @class = "col-md-2 control-label AlignLeft lblWidth lblPaddingRightDiv" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.Enzymes, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtEnzymes" })
+                </td>
+            </tr>
+            <tr class="trHeight"><td></td><td></td><td></td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.RecipeModel.ProductionPrice, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td colspan="2">
+                    @Html.TextBoxFor(m => m.RecipeModel.ProductionPrice, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtProductionPrice" })
+                </td>
+            </tr>
+
+        </table>
+        <hr style="width:100%;text-align:left;margin-left:0">
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.BrewingModel.Quantity, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.BrewingModel.Quantity, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtQuantity" })
+                </td>
+
+                <td>
+                    @Html.LabelFor(m => m.BrewingModel.Processed_YN, new { @class = "col-md-2 control-label AlignLeft lblPaddingRightDiv" })
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m.BrewingModel.Processed_YN, new SelectList("NY"), new { @class = "form-control ddlWidth AlignRight", id = "Processed_YN" })
+
+                   @*@Html.DropDownListFor(m => m.RecipeModel.Id, new SelectList(Model.RecipeModel.oRecipeMasterDTO, "Id", "RecipeName"), "Select Ingredient", new { @class = "form-control ddlWidth", id = "ddlRecipeName" })*@
+                </td>
+
+                @*<td style="visibility:hidden">
+                    @Html.LabelFor(m => m.BrewingModel.BrewingTimeInHrs, new { @class = "col-md-2 control-label AlignLeft lblWidth2" })
+                </td>
+                <td style="visibility:hidden">
+                    @Html.TextBoxFor(m => m.BrewingModel.BrewingTimeInHrs, new { @class = "form-control txtBoxWidth2 AlignRight", id = "txtBrewingTime" })
+                </td>*@
+
+                <td style="visibility:hidden">
+                    <label id="lblReceipe" va/>
+                </td>
+
+            </tr>
+
+        </table>
+        <table>
+            <tr >
+                <td style="padding-top:15px">
+                    @if (Model.BrewingModel.id == 0)
+                    {
+                        <input type="submit" class="btn btn-default btn" id="btnSaveBrewing" value="Start Brewing" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default btn" id="btnSaveBrewing" value="Update" />
+                    }
+                </td>
+            </tr>
+        </table>
+    }
+
+    
+
+@section scripts{
+    <script>
+        
+        $(document).ready(function () {
+            $("#ddlRecipeName").val(@Model.BrewingModel.Recipeid);
+            $("#ddlRecipeName").attr('selected', 'selected');
+            onReceipeChange();
+         });
+
+        function onReceipeChange(){
+            var DropDownSelectedVal = $("#ddlRecipeName :selected").val();
+
+            if (DropDownSelectedVal != null && DropDownSelectedVal != '') {
+                $.ajax({
+
+                    url: "/BrewApp/Brewing/GetRecipeDetails",
+                    type: 'POST',
+                    data: { "Id": DropDownSelectedVal },
+                    dataType: 'json',
+                    success: function (response) {
+
+                        $("#txtMalt").val(response.Malt);
+                        $("#txtMaltType").val(response.MaltType);
+                        $("#txtHops").val(response.Hops);
+                        $("#txtHopsType").val(response.HopsType);
+                        $("#txtYeast").val(response.Yeast);
+                        $("#txtYeastType").val(response.YeastType);
+                        $("#txtWater").val(response.Water);
+                        $("#txtOrangePeels").val(response.OrangePeels);
+                        $("#txtCoriander").val(response.Coriander);
+                        $("#txtFilterSheets").val(response.FilterSheets);
+                        $("#txtCleaningChemicals").val(response.CleaningChemicals);
+                        $("#txtIodine").val(response.Iodine);
+                        $("#txtEnzymes").val(response.Enzymes);
+                        $("#txtRecipeName").val(response.RecipeName);
+                        $("#txtRecipeid").val(response.Id);
+                        $("#txtProductionPrice").val(response.ProductionPrice.toFixed(2));
+                    },
+
+                    error: function (xhr) {
+
+                        alert("Something went wrong, please try again");
+
+                    }
+
+                });
+
+            }
+            else {
+                $("#txtMalt").val('0');
+                $("#txtMaltType").val('');
+                $("#txtHops").val('0');
+                $("#txtHopsType").val('');
+                $("#txtYeast").val('0');
+                $("#txtYeastType").val('');
+                $("#txtWater").val('0');
+                $("#txtOrangePeels").val('0');
+                $("#txtCoriander").val('0');
+                $("#txtFilterSheets").val('0');
+                $("#txtCleaningChemicals").val('0');
+                $("#txtIodine").val('0');
+                $("#txtEnzymes").val('0');
+                $("#txtProductionPrice").val('0');
+            }
+
+        }
+    </script>
+}

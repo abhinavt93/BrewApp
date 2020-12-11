@@ -1,0 +1,105 @@
+﻿@model BrewApp.ViewModel.KegViewModel
+@{
+    ViewBag.Title = "UpdateOrAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2 id="HeadingUpdateOrAdd">Keg Master</h2>
+
+@using (Html.BeginForm("UpdateDB", "Kegs", new { id = Model.Keg.KegID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Keg.KegNumber, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @if (Model.Keg.KegID == 0)
+            {
+                @Html.TextBoxFor(m => m.Keg.KegNumber, new { @class = "form-control" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Keg.KegNumber, new { @readonly = "readonly", @class = "form-control" })
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Keg.PreviousLocation, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @if(Model.Keg.KegID == 0)
+            {
+                @Html.DropDownListFor(m => m.Keg.PreviousLocation, new SelectList(Model.Customers, "CustomerID", "CustomerName"), "Select Customer", new { @class = "form-control ddlWidth", id = "ddlPreviousLocation" })
+            }
+            else
+            {
+                @Html.DropDownListFor(m => m.Keg.PreviousLocation, new SelectList(Model.Customers, "CustomerID", "CustomerName"), "Select Customer", new { @readonly = "readonly", @class = "form-control ddlWidth", id = "ddlPreviousLocation" })
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Keg.CurrentLocation, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Keg.CurrentLocation, new SelectList(Model.Customers, "CustomerID", "CustomerName"), "Select Customer", new { @class = "form-control ddlWidth", id = "ddlCurrentLocation" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" id="btnUpdateKeg" value="Update" />
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

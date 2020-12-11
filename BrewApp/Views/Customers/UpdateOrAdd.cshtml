@@ -1,0 +1,133 @@
+﻿@model BrewApp.DTOs.CustomerDTO
+@{
+    ViewBag.Title = "UpdateOrAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2 id="HeadingUpdateOrAdd">Customer Master</h2>
+
+@using (Html.BeginForm("UpdateDB", "Customers", new { id = Model.CustomerID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CustomerName, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FatherName, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.MotherName, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.MotherName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.MobNo, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.MobNo, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PAN, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PAN, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CurrentAddress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CurrentAddress, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PermanentAddress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PermanentAddress, new { @class = "form-control" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.DOB, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DOB, new { @class = "form-control" })
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" id="btnUpdateCustomer" value="Update" />
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

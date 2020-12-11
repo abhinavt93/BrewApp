@@ -1,0 +1,94 @@
+﻿@model BrewApp.ViewModel.ExpenseViewModel
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+</style>
+
+<h2>Expense Entry</h2>
+
+@using (Html.BeginForm("Save", "Expense", new { id = @Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+
+    <div class="form-group cssHeight">
+        @Html.LabelFor(m => m.ExpenseName, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ExpenseName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ExpenseName, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group cssHeight">
+        @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" id="btnAddExpense" value=@Model.Mode />
+        </div>
+    </div>
+
+    <br />
+    
+    <table id="tblExpense" class="table" >
+        <thead>
+            <tr>
+                <td class="ColWidthM"></td>
+                <th class="AlignCenter ColWidthM">ID</th>
+                <th class="AlignCenter ColWidthL">Expense Name</th>
+                <th class="AlignCenter ColWidthL">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ExpenseMaster)
+            {
+                <tr>
+                    <td class="AlignCenter"> @Html.ActionLink("Update", "Load", new { id = item.Id })</td>
+                    <td class="AlignCenter">@item.Id</td>
+                    <td class="AlignLeft">@item.ExpenseName</td>
+                    <td class="AlignRight">@(Math.Round(item.Price, 2))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

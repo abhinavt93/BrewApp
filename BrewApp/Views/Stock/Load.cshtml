@@ -1,0 +1,266 @@
+﻿@model BrewApp.ViewModel.StockViewModel
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthML {
+        width: 150px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+
+    .ValidationSummaryHeight {
+        height: 30px;
+        padding-left: 10px;
+    }
+
+    .txtBoxWidth {
+        width: 90px !important;
+    }
+
+    txtBoxWidth1 {
+        width: 150px !important;
+    }
+
+    txtBoxWidth2 {
+        width: 80px !important;
+    }
+
+    .ddlWidth {
+        width: 200px !important;
+        padding-right: 5px;
+    }
+
+
+    .lblWidth {
+        width: 80px !important;
+    }
+
+    .lblWidth1 {
+        width: 160px !important;
+        padding-left: 20px !important;
+    }
+
+    .lblWidthQuantityLeft {
+        width: 40px;
+    } 
+
+    .lblWidthQuantityRight {
+        width: 142px;
+    } 
+
+    .lblWidthPriceLeft {
+        width: 40px;
+    } 
+
+    .lblWidthPriceRight {
+        width: 242px;
+    } 
+
+    .tdWidth {
+        width: 120px;
+    }
+
+    .tblRecipeName {
+        border-bottom: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+    }
+
+    .txtBoxRecipeName {
+        width: 200px !important;
+    }
+
+    #tblRecipeData {
+        margin-top: 10px;
+    }
+
+    .btn {
+        width: 130px;
+        margin-left: 15px;
+        /*margin-top: 20px;*/
+    }
+
+    .txtBoxWidth3 {
+        width: 50px !important;
+    }
+
+</style>
+
+<h2>Stock Entry</h2>
+
+@using (Html.BeginForm("Add", "Stock", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+
+    <div class="form-group cssHeight">
+        @Html.Label("Ingredients", new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Id, new SelectList(Model.StockMasterDto, "Id", "Ingredient_Name"), "Select Ingredient", new { @class = "form-control" , id =  "ddlIngredient"})
+            @Html.ValidationMessageFor(m => m.Id, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group cssHeight">
+        @Html.Label("Ingredient Type", new { @class = "col-md-2 control-label AlignLeft" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.IngredientType, new SelectList(Model.lstIngredientType, "ID", "Value"), "Select Ingredient Type", new { @class = "form-control", id = "ddlIngredientType" })
+            @Html.ValidationMessageFor(m => m.IngredientType, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group cssHeight">
+        @Html.LabelFor(m => m.Quantity, new { @class = "col-md-2 control-label AlignLeft", id = "lblQuantity" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Quantity, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group cssHeight">
+        @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label AlignLeft", id = "lblPrice" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Price, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" id="btnAddStock" value="Add" />
+        </div>
+    </div>
+
+    <table id="tblStock" class="table" >
+        <thead>
+            <tr>
+                <th class="AlignCenter ColWidthM">ID</th>
+                <th class="AlignCenter ColWidthL">Ingredients</th>
+                <th class="AlignCenter ColWidthL">Quantity<br />(g, kg, mL or L)</th>
+                <th class="AlignCenter ColWidthXL">Weighted Average Price<br />(per g, kg, mL or L)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.StockMasterDto)
+            {
+                <tr>
+                    <td class="AlignCenter">@item.Id</td>
+                    <td class="AlignLeft">@item.Ingredient_Name</td>
+                    @if (item.Quantity.Contains(","))
+                    {
+                        <td>
+                            <table>
+                                @foreach (var quantity in item.multiArrayQuantity)
+                                {
+                                    <tr>
+                                        <td class="AlignRight lblWidthQuantityLeft" style="white-space:pre-line"> @quantity.Split(':')[0] </td>
+                                        <td class="AlignRight lblWidthQuantityRight" style="white-space:pre-line"> @Math.Round(Convert.ToDouble(quantity.Split(':')[1]), 2) </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                @foreach (var price in item.multiArrayPrice)
+                                {
+                                    <tr>
+                                        <td class="AlignRight lblWidthPriceLeft" style="white-space:pre-line"> @price.Split(':')[0] </td>
+                                        <td class="AlignRight lblWidthPriceRight" style="white-space:pre-line"> @Math.Round(Convert.ToDouble(price.Split(':')[1]), 2) </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+
+
+                        @*<td class="AlignRight" style="white-space:pre-line"> @item.Quantity.Replace(",", "\n") </td>
+                        <td class="AlignRight" style="white-space:pre-line">@item.Price.Replace(",", "\n")</td>*@
+                    }
+                    else
+                    {
+                        <td class="AlignRight">@(Math.Round(Convert.ToDouble(item.Quantity), 2))</td>
+                        <td class="AlignRight">@(Math.Round(Convert.ToDouble(item.Price), 2))</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#ddlIngredient").change(function (evt) {
+                debugger;
+                var DropDownSelectedVal = $("#ddlIngredient :selected").val();
+
+                if (DropDownSelectedVal != null && DropDownSelectedVal != '' && DropDownSelectedVal > 3) {
+                    $('#ddlIngredientType').prop('selectedIndex', 1);
+                    $("#ddlIngredientType").prop("disabled", true);
+                }
+                else {
+                    $("#ddlIngredientType").prop("disabled", false);
+                }
+
+                if (DropDownSelectedVal != null && DropDownSelectedVal != '' && (DropDownSelectedVal == 2 || DropDownSelectedVal == 3 || DropDownSelectedVal == 5 || DropDownSelectedVal == 6 || DropDownSelectedVal == 7))
+                {
+                    $('#lblQuantity').html('Quantity (in g)');
+                    $('#lblPrice').html('Price (per g)');
+                }
+                else if (DropDownSelectedVal != null && DropDownSelectedVal != '' && DropDownSelectedVal == 1){
+                    $('#lblQuantity').html('Quantity (in kg)');
+                    $('#lblPrice').html('Price (per kg)');
+                }
+                else if (DropDownSelectedVal != null && DropDownSelectedVal != '' && (DropDownSelectedVal == 4 || DropDownSelectedVal == 8)) {
+                    $('#lblQuantity').html('Quantity (in L)');
+                    $('#lblPrice').html('Price (per L)');
+                }
+                else if (DropDownSelectedVal != null && DropDownSelectedVal != '' && (DropDownSelectedVal == 9 || DropDownSelectedVal == 10)) {
+                    $('#lblQuantity').html('Quantity (in mL)');
+                    $('#lblPrice').html('Price (per mL)');
+                }
+                else {
+                    $('#lblQuantity').html('Quantity <br />(in g, kg, mL or L)');
+                    $('#lblPrice').html('Price <br />(per g, kg, mL or L)');
+                }
+            });
+
+        });
+
+        </script>
+        }

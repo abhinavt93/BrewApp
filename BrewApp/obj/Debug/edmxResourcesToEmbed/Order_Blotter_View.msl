@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommonDBModelStoreContainer" CdmEntityContainer="CommonDBEntities2">
+    <EntitySetMapping Name="vw_Order_Blotter">
+      <EntityTypeMapping TypeName="CommonDBModel.vw_Order_Blotter">
+        <MappingFragment StoreEntitySet="vw_Order_Blotter">
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+          <ScalarProperty Name="Production_Price" ColumnName="Production_Price" />
+          <ScalarProperty Name="Production_Cost" ColumnName="Production_Cost" />
+          <ScalarProperty Name="Customer_Price" ColumnName="Customer_Price" />
+          <ScalarProperty Name="Customer_Cost" ColumnName="Customer_Cost" />
+          <ScalarProperty Name="GST" ColumnName="GST" />
+          <ScalarProperty Name="Margin" ColumnName="Margin" />
+          <ScalarProperty Name="Trasportation_Cost" ColumnName="Trasportation_Cost" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+          <ScalarProperty Name="Customer_Restaurant_Details" ColumnName="Customer_Restaurant_Details" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

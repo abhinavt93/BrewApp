@@ -1,0 +1,305 @@
+﻿@model BrewApp.ViewModel.OrderBlotterViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+        vertical-align:central;
+       
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .btnUpdate {
+        width: 130px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    #btnUpdate {
+        cursor: pointer;
+        -webkit-appearance: button;
+    }
+
+        .ddlWidth {
+        width: 200px !important;
+        padding-right:5px;
+    }
+
+    .lblWidth {
+        width: 80px !important;
+    }
+    .txtBoxWidth3 {
+        width: 50px !important;
+    }
+    .lblWidth1 {
+         width: 150px !important;
+    }
+    .rowUnprocessed{
+        color: darkred;
+        background-color:#fcf1f0;
+    }
+    .rowProcessed {
+        /*color: darkgreen;
+        background-color: lightgreen;*/
+    }
+</style>
+
+<h2>Order Blotter</h2>
+
+@using (Html.BeginForm("GetRefIdDetails", "OrderBlotter", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+    
+<table>
+    <tr>
+        <th>
+            @Html.LabelFor(m => m.PaymentStatus, new { @class = "col-md-2 control-label AlignLeft lblWidthProcessedYN" })
+        </th>
+
+        <th>
+            @Html.DropDownListFor(m => m.PaymentStatus, new SelectList(Enum.GetValues(typeof(BrewApp.ViewModel.PaymentStatus))), new { @class = "form-control ddlWidth", id = "ddlRemainingAmount" })
+        </th>
+
+        <td>
+            @Html.LabelFor(m => m.RefID, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+        </td>
+
+        <td>
+            @Html.TextBoxFor(m => m.RefID, new { @class = "form-control txtBoxWidth2 AlignRight", id = "txtRefID" })
+        </td>
+
+        <td>
+            <input type="submit" class="btn btn-default btn" id="btnSearch" value="Search" />
+        </td>
+
+        <td>
+            @Html.LabelFor(m => m.RecordPerPage, new { @class = "col-md-2 control-label AlignLeft lblWidth1" })
+        </td>
+
+        <td>
+            @Html.TextBoxFor(m => m.RecordPerPage, new { @class = "form-control txtBoxWidth3 AlignRight", id = "txtRefID", @readonly = "readonly" })
+        </td>
+
+        <td style="display:none">
+            <input type="text" id="txtBlotterId" value="0">
+        </td>
+
+    </tr>
+</table>
+<br />
+<br />
+
+    <table id="tblOrderBlotter" class="table" style="width: max-content;">
+        <thead>
+            <tr>
+                <th class="AlignCenter ColWidthM">Actions</th>
+                <th class="AlignCenter ColWidthM">Order ID</th>
+                <th class="AlignCenter ColWidthL">Recipe Name</th>
+                <th class="AlignCenter ColWidthL">Order Quantity</th>
+                <th class="AlignCenter ColWidthL">Production Price</th>
+                <th class="AlignCenter ColWidthL">Production Cost</th>
+                <th class="AlignCenter ColWidthL">Customer Price</th>
+                <th class="AlignCenter ColWidthL">Customer Cost</th>
+                <th class="AlignCenter ColWidthL">Amount Paid</th>
+                <th class="AlignCenter ColWidthL">Amount Remaining</th>
+                <th class="AlignCenter ColWidthM">GST</th>
+                <th class="AlignCenter ColWidthM">Margin</th>
+                <th class="AlignCenter ColWidthL">Trasportation Cost</th>
+                <th class="AlignCenter ColWidthL">Sales Person</th>
+                <th class="AlignCenter ColWidthL">Client Details</th>
+                <th class="AlignCenter ColWidthL">Remark</th>
+                <th class="AlignCenter ColWidthL">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.OrderBlotter)
+            {
+                if (order.Remaining_Amount > 0)
+                {
+                    <tr class="rowUnprocessed">
+                        <td class="AlignCenter">@Html.ActionLink("Update", "Load", "OrderEntry", new { id = order.OrderId }, new { @class = "" })</td>
+                        <td class="AlignCenter ColWidthM">@order.OrderId</td>
+                        <td class="AlignLeft ColWidthL">#@order.Recipeid: @order.RecipeName</td>
+                        <td class="AlignRight">@order.Order_Quantity</td>
+                        <td class="AlignRight">@(Math.Round(order.Production_Price, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Production_Cost, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Customer_Price, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Customer_Cost, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Amount_Paid, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Remaining_Amount, 2))</td>
+                        <td class="AlignRight">@order.GST</td>
+                        <td class="AlignRight">@order.Margin</td>
+                        <td class="AlignRight">@(Math.Round(order.Trasportation_Cost, 2))</td>
+                        <td class="AlignLeft">@order.Sales_Person</td>
+                        <td class="AlignLeft">@order.Customer_Restaurant_Details</td>
+                        <td class="AlignLeft">@order.Remark</td>
+                        <td class="AlignCenter">@order.Created_At.ToString("dd-MMM-yyyy HH:mm:ss").Replace("01-Jan-1900", "-")</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="rowProcessed">
+                        <td class="AlignCenter"></td>
+                        <td class="AlignCenter ColWidthM">@order.OrderId</td>
+                        <td class="AlignLeft ColWidthL">#@order.Recipeid: @order.RecipeName</td>
+                        <td class="AlignRight">@order.Order_Quantity</td>
+                        <td class="AlignRight">@(Math.Round(order.Production_Price, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Production_Cost, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Customer_Price, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Customer_Cost, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Amount_Paid, 2))</td>
+                        <td class="AlignRight">@(Math.Round(order.Remaining_Amount, 2))</td>
+                        <td class="AlignRight">@order.GST</td>
+                        <td class="AlignRight">@order.Margin</td>
+                        <td class="AlignRight">@(Math.Round(order.Trasportation_Cost, 2))</td>
+                        <td class="AlignLeft">@order.Sales_Person</td>
+                        <td class="AlignLeft">@order.Customer_Restaurant_Details</td>
+                        <td class="AlignLeft">@order.Remark</td>
+                        <td class="AlignCenter">@order.Created_At.ToString("dd-MMM-yyyy HH:mm:ss").Replace("01-Jan-1900", "-")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div id="OrderPaginationDiv" >
+        @Html.PagedListPager(Model.OrderBlotter, page => Url.Action("Load", new { id = Model.RefID, PaymentStatus = Model.PaymentStatus, page = page }))
+    </div>
+
+@*<table id="tblBrewingBlotter" class="table" style=" display:none; width: max-content;">
+    <thead>
+        <tr>
+            <th class="AlignCenter ColWidthM">Actions</th>
+            <th class="AlignCenter ColWidthM">Brew ID</th>           
+            <th class="AlignCenter ColWidthL">Recipe Name</th>
+            <th class="AlignCenter ColWidthL">Brew Quantity</th>
+            <th class="AlignCenter ColWidthL">Prod. Price</th>
+            <th class="AlignCenter ColWidthL">Brew Time</th>
+            <th class="AlignCenter ColWidthL">Processed YN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brew in Model.BrewingBlotter)
+        {
+            <tr>
+                <td class="AlignCenter">@Html.ActionLink("Update", "Load", "Brewing", new { id = brew.BrewingId }, new { @class = "" })</td>
+                <td class="AlignCenter">@brew.BrewingId</td>
+                <td class="AlignLeft">#@brew.Recipeid: @brew.RecipeName</td>
+                <td class="AlignRight">@(Math.Round(brew.Quantity, 2))</td>
+                <td class="AlignRight">@(Math.Round(brew.ProductionPrice, 2))</td>
+                <td class="AlignCenter">@brew.BrewingTime.ToString("dd-MMM-yyyy HH:mm:ss").Replace("01-Jan-1900", "-")</td>
+                <td class="AlignCenter">@brew.Processed_YN</td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+    
+    @*<div id="BrewingPaginationDiv" style="display:none">
+        @Html.PagedListPager(Model.BrewingBlotter, page => Url.Action("LoadBrewingBlotter", new { page }))
+    </div>*@
+
+}
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        debugger;
+        $("#txtBlotterId").val(@ViewBag.BlotterId);
+        var DropDownSelectedVal = $("#ddlBlotter :selected").val();
+        if ($("#txtBlotterId").val() == 1 || DropDownSelectedVal == 1)
+        {
+            $("#ddlBlotter").val($("#txtBlotterId").val());
+            onBlotterChange()
+        }
+    });
+
+    function onBlotterChange() {
+        var DropDownSelectedVal = $("#ddlBlotter :selected").val();
+
+        if (DropDownSelectedVal != null && DropDownSelectedVal != '') {
+
+            if (DropDownSelectedVal == 1) {
+                $("#tblBrewingBlotter").css("display", "");
+                $("#tblOrderBlotter").css("display", "none");
+                $("#BrewingPaginationDiv").css("display", "");
+                $("#OrderPaginationDiv").css("display", "none");
+
+            } else {
+                $("#tblOrderBlotter").css("display", "");
+                $("#tblBrewingBlotter").css("display", "none");
+                $("#BrewingPaginationDiv").css("display", "none");
+                $("#OrderPaginationDiv").css("display", "");
+            }
+
+        }
+        else {
+            $("#tblOrderBlotter").css("display", "");
+            $("#tblBrewingBlotter").css("display", "none");
+            $("#BrewingPaginationDiv").css("display", "none");
+            $("#OrderPaginationDiv").css("display", "");
+        }
+
+    }
+
+    //$("#txtRefID").change(function (evt) {
+
+    //    var RefId = $("#txtRefID").val();
+    //    var BlotterId = $("#ddlBlotter :selected").val();
+
+    //    if (RefId != null && RefId != '') {
+    //        $.ajax({
+
+    //            url: "/BrewApp/Workflow/GetRefIdDetails",
+    //            type: 'POST',
+    //            data: { "Id": RefId, "BlotterId": BlotterId },
+    //            dataType: 'json',
+    //            success: function (response) {
+    //                $("#txtRecipeName").val(response.RecipeName);
+    //                $("#txtRecipeid").val(response.Id);
+    //                $("#txtProductionPrice").val(response.ProductionPrice);
+    //            },
+
+    //            error: function (xhr) {
+    //                alert("Recipe is in brewing stage.");
+    //            }
+
+    //        });
+
+    //    }
+    //    else {
+    //        $("#txtRecipeName").val('');
+    //        $("#txtRecipeid").val('');
+    //        $("#txtProductionPrice").val('');
+    //    }
+
+    //});
+
+</script>
+}

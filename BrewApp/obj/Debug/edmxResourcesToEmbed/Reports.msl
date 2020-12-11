@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommonDBModelStoreContainer" CdmEntityContainer="CommonDBEntities4">
+    <EntitySetMapping Name="vw_Employee_Report">
+      <EntityTypeMapping TypeName="CommonDBModel.vw_Employee_Report">
+        <MappingFragment StoreEntitySet="vw_Employee_Report">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+          <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+          <ScalarProperty Name="TotalMargin" ColumnName="TotalMargin" />
+          <ScalarProperty Name="TotalMargin_Amount" ColumnName="TotalMargin_Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Recipe_Report">
+      <EntityTypeMapping TypeName="CommonDBModel.vw_Recipe_Report">
+        <MappingFragment StoreEntitySet="vw_Recipe_Report">
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+          <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+          <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+          <ScalarProperty Name="TotalOrderPrice" ColumnName="TotalOrderPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Stock_Report">
+      <EntityTypeMapping TypeName="CommonDBModel.vw_Stock_Report">
+        <MappingFragment StoreEntitySet="vw_Stock_Report">
+          <ScalarProperty Name="Ingredient_Id" ColumnName="Ingredient_Id" />
+          <ScalarProperty Name="Ingredient_Name" ColumnName="Ingredient_Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

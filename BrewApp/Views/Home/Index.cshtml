@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width:500px;
+        height:500px;
+        padding-top:15px;
+    }
+    .para {
+        margin-top:15px;
+    }
+    .heading {
+        margin-top:25px;
+    }
+</style>
+
+
+@*<div>
+    <h2>Pune Beer Farm</h2>
+    
+</div>*@
+
+<div>
+    <img src="/BrewApp/img/Pune_Beer_Farm.png" alt="Pune Beer Farm Logo" class="center">
+</div>
+
+<div>
+    <p class="para">Pune Beer Farm Llp is a Limited Liability Partnership firm incorporated on 10 December 2018. It is registered at Registrar of Companies, Pune. Its total obligation of contribution is Rs. 100,000. Designated Partners of Pune Beer Farm Llp are Jyoti Manoj Khaire and Abhijeet Dnyaneshwar Khaire.</p>
+
+    <p class="para">Pune Beer Farm Llp's last financial year end date for which Statement of Accounts and Solvency were filed is N/A and as per records from Ministry of Corporate Affairs (MCA), date of last financial year end date for which Annual Return were filed is N/A.</p>
+
+    <p class="para">Pune Beer Farm Llp's LLP Identification Number is (LLPIN)AAN-6958. Its Email address is abhijeetkhaire13@gmail.com and its registered address is 'H N 835, FLT 18, PARTH PRAID RUI TAL- BARAMATI, DIST-PUNE PUNE Pune MH 413102 IN'.</p>
+</div>
+
+<div>
+    <h4 class="heading">
+        Company Details
+    </h4>
+</div>
+<div>
+    <table class="table">
+        <tr>
+            <td>
+                LLP Identification Number
+            </td>
+            <td>
+                AAN-6958
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Company Name
+            </td>
+            <td>
+                PUNE BEER FARM LLP
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Company Status
+            </td>
+            <td>
+                Active
+            </td>
+        </tr>
+        <tr>
+            <td>
+                RoC
+            </td>
+            <td>
+                RoC-Pune
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Main division of business activity to be carried out in India
+            </td>
+            <td>
+                Manufacture of food products and beverages
+            </td>
+        <tr>
+            <td>
+                Description of main division
+            </td>
+            <td>
+                Manufacture of food products and beverages
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Number of Designated Partners
+            </td>
+            <td>
+                2
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Date of Incorporation
+            </td>
+            <td>
+                10 December 2018
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Age of Company
+            </td>
+            <td>
+                @Convert.ToInt16(((TimeSpan)(DateTime.Today - new DateTime(2018, 12, 10))).Days).ToString() Days
+            </td>
+        </tr>
+    </table>
+</div>

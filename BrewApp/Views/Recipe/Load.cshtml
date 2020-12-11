@@ -1,0 +1,323 @@
+﻿@model BrewApp.ViewModel.RecipeViewModel
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthML {
+        width: 150px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+
+    .ValidationSummaryHeight {
+        height: 30px;
+        padding-left:10px;
+    }
+
+    .txtBoxWidth{
+        width:90px !important;
+    }
+    .ddlWidth{
+        width:57px !important;
+        margin-left:90px;
+    }
+    .lblWidth{
+        width:141px !important;
+        padding-left:14px !important;
+    }
+    .lblWidth1{
+        width:90px !important;
+        padding-left:14px !important;
+    }
+    .tdWidth {
+        width:120px;
+    }
+    .tblRecipeName {
+        border-bottom:1px solid #dddddd;
+        border-top:1px solid #dddddd;
+        border-left:1px solid #dddddd;
+        border-right:1px solid #dddddd;
+    }
+    .txtBoxRecipeName{
+        width:200px !important;
+    }
+
+    #tblRecipeData{
+        margin-top:10px;
+    }
+    .btnUpdate
+    {
+        width:130px;
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+    .lblWidthQuantityLeft {
+        width: 40px;
+    } 
+
+    .lblWidthQuantityRight {
+        width: 142px;
+    } 
+</style>
+<h2>Recipe Master</h2>
+
+
+@using (Html.BeginForm("Add", "Recipe", new { id = @Model.Id }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+    <table>
+        <tr style="margin-top:5px;">
+            <td>
+                @Html.LabelFor(m => m.RecipeName, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+
+                @Html.TextBoxFor(m => m.RecipeName, new { @class = "form-control txtBoxRecipeName" })
+            </td>
+        </tr>
+        <tr class="ValidationSummaryHeight">
+            <td>
+                @Html.ValidationMessageFor(m => m.RecipeName, null, new { @class = "text-danger" })
+            </td>
+        </tr>
+    </table>
+
+
+    <table style="width: max-content;">
+
+        <tr>
+            <td colspan="1" class="tdWidth">
+                @Html.LabelFor(m => m.Malt, new { @class = "col-md-2 control-label AlignLeft lblWidth1" })
+                @Html.DropDownListFor(m => m.MaltType, new SelectList(Model.lstIngredientType, "ID", "Value"), "", new { @class = "form-control ddlWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Malt, new { @class = "form-control txtBoxWidth AlignRight" })
+                
+            </td>
+
+
+            <td colspan="1" class="tdWidth">
+                @Html.LabelFor(m => m.Hops, new { @class = "col-md-2 control-label AlignLeft lblWidth1" })
+                @Html.DropDownListFor(m => m.HopsType, new SelectList(Model.lstIngredientType, "ID", "Value"), "", new { @class = "form-control ddlWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Hops, new { @class = "form-control txtBoxWidth AlignRight" })
+
+            </td>
+
+            <td colspan="1" class="tdWidth">
+                @Html.LabelFor(m => m.Yeast, new { @class = "col-md-2 control-label AlignLeft lblWidth1" })
+                @Html.DropDownListFor(m => m.YeastType, new SelectList(Model.lstIngredientType, "ID", "Value"), "", new { @class = "form-control ddlWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Yeast, new { @class = "form-control txtBoxWidth AlignRight" })
+
+            </td>
+            <td>
+                @Html.LabelFor(m => m.Water, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Water, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+        </tr>
+
+        <tr class="ValidationSummaryHeight">
+            <td colspan="2">
+                @Html.ValidationMessageFor(m => m.MaltType, null, new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Malt, null, new { @class = "text-danger" })
+            </td>
+            <td colspan="2">                
+                @Html.ValidationMessageFor(m => m.HopsType, null, new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Hops, null, new { @class = "text-danger" })
+            </td>
+            <td colspan="2">
+                @Html.ValidationMessageFor(m => m.YeastType, null, new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Yeast, null, new { @class = "text-danger" })
+            </td>
+            <td colspan="2">
+                @Html.ValidationMessageFor(m => m.Water, null, new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrangePeels, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.OrangePeels, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+            <td>
+                @Html.LabelFor(m => m.Coriander, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Coriander, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+            <td>
+                @Html.LabelFor(m => m.FilterSheets, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.FilterSheets, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+            <td>
+                @Html.LabelFor(m => m.CleaningChemicals, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.CleaningChemicals, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+        </tr>
+
+        <tr class="ValidationSummaryHeight">
+            <td>
+                @Html.ValidationMessageFor(m => m.OrangePeels, null, new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.Coriander, null, new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.FilterSheets, null, new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.CleaningChemicals, null, new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Iodine, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Iodine, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+
+            <td>
+                @Html.LabelFor(m => m.Enzymes, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Enzymes, new { @class = "form-control txtBoxWidth AlignRight" })
+            </td>
+        </tr>
+
+        <tr class="ValidationSummaryHeight">
+            <td>
+                @Html.ValidationMessageFor(m => m.Iodine, null, new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.ValidationMessageFor(m => m.Enzymes, null, new { @class = "text-danger" })
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" class="btn btn-default" id="btnAddRecipe" value=@Model.Mode />
+
+    <table id="tblRecipeData" class="table" style="width: max-content;">
+        <thead>
+            <tr>
+                <td class="ColWidthM"></td>
+                <td class="AlignCenter ColWidthL">Recipe Name</td>
+                <td class="AlignCenter ColWidthML">Malt</td>
+                <td class="AlignCenter ColWidthML">Hops</td>
+                <td class="AlignCenter ColWidthML">Yeast</td>
+                <td class="AlignCenter ColWidthM">Water</td>
+                <td class="AlignCenter ColWidthML">Orange Peels</td>
+                <td class="AlignCenter ColWidthM">Coriander</td>
+                <td class="AlignCenter ColWidthM">Filter Sheets</td>
+                <td class="AlignCenter ColWidthML">Wash Chemicals</td>
+                <td class="AlignCenter ColWidthM">Iodine</td>
+                <td class="AlignCenter ColWidthM">Enzymes</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.oRecipeMasterDTO)
+        {
+            <tr>
+                <td class="AlignCenter"> @Html.ActionLink("Update", "Load", new { id = item.id })</td>
+                <td class="AlignLeft">@item.RecipeName</td>
+                @if (item.Malt.Contains(":"))
+                {
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="AlignRight lblWidthQuantityLeft">@item.Malt.Split(':')[0]</td>
+                                <td class="AlignRight lblWidthQuantityRight">@item.Malt.Split(':')[1] kg</td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+                else
+                {
+                    <td class="AlignRight"></td>
+                }
+                
+                @if (item.Hops.Contains(":"))
+                {
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="AlignRight lblWidthQuantityLeft">@item.Hops.Split(':')[0]</td>
+                                <td class="AlignRight lblWidthQuantityRight">@item.Hops.Split(':')[1] g</td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+                else
+                {
+                    <td class="AlignRight">@item.Hops g</td>
+                }
+                
+                @if (item.Yeast.Contains(":"))
+                {
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="AlignRight lblWidthQuantityLeft">@item.Yeast.Split(':')[0]</td>
+                                <td class="AlignRight lblWidthQuantityRight">@item.Yeast.Split(':')[1] g</td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+                else
+                {
+                    <td class="AlignRight">@item.Yeast g</td>
+                }
+                
+                <td class="AlignRight">@item.Water L</td>
+                <td class="AlignRight">@item.OrangePeels g</td>
+                <td class="AlignRight">@item.Coriander g</td>
+                <td class="AlignRight">@item.FilterSheets g</td>
+                <td class="AlignRight">@item.CleaningChemicals L</td>
+                <td class="AlignRight">@item.Iodine mL</td>
+                <td class="AlignRight">@item.Enzymes mL</td>
+            </tr>
+        }
+    </table>
+}
+

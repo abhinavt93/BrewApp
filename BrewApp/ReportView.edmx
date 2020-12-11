@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CommonDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Brewing_Blotter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Brewing_Blotter">
+          <Key>
+            <PropertyRef Name="BrewingId" />
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductionCost" />
+            <PropertyRef Name="BrewingTime" />
+          </Key>
+          <Property Name="BrewingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recipeid" Type="int" Nullable="false" />
+          <Property Name="RecipeName" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="float" Nullable="false" />
+          <Property Name="ProductionCost" Type="float" Nullable="false" />
+          <Property Name="BrewingTime" Type="datetime" Nullable="false" />
+          <Property Name="Processed_YN" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Employee_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Employee_Report">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="TotalOrders" />
+            <PropertyRef Name="TotalOrderAmount" />
+            <PropertyRef Name="TotalMargin" />
+            <PropertyRef Name="TotalMargin_Amount" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar(max)" />
+          <Property Name="TotalOrders" Type="int" Nullable="false" />
+          <Property Name="TotalOrderAmount" Type="float" Nullable="false" />
+          <Property Name="TotalMargin" Type="float" Nullable="false" />
+          <Property Name="TotalMargin_Amount" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Order_Blotter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Order_Blotter">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="Order_Quantity" />
+            <PropertyRef Name="Production_Price" />
+            <PropertyRef Name="Production_Cost" />
+            <PropertyRef Name="Customer_Price" />
+            <PropertyRef Name="Customer_Cost" />
+            <PropertyRef Name="GST" />
+            <PropertyRef Name="Margin" />
+            <PropertyRef Name="Trasportation_Cost" />
+            <PropertyRef Name="Created_At" />
+            <PropertyRef Name="Amount_Paid" />
+            <PropertyRef Name="Remaining_Amount" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Recipeid" Type="int" Nullable="false" />
+          <Property Name="RecipeName" Type="nvarchar(max)" />
+          <Property Name="Order_Quantity" Type="float" Nullable="false" />
+          <Property Name="Production_Price" Type="float" Nullable="false" />
+          <Property Name="Production_Cost" Type="float" Nullable="false" />
+          <Property Name="Customer_Price" Type="float" Nullable="false" />
+          <Property Name="Customer_Cost" Type="float" Nullable="false" />
+          <Property Name="GST" Type="float" Nullable="false" />
+          <Property Name="Margin" Type="float" Nullable="false" />
+          <Property Name="Trasportation_Cost" Type="float" Nullable="false" />
+          <Property Name="Sales_Person" Type="nvarchar(max)" />
+          <Property Name="Customer_Restaurant_Details" Type="nvarchar(max)" />
+          <Property Name="Remark" Type="nvarchar(max)" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar(max)" />
+          <Property Name="Amount_Paid" Type="float" Nullable="false" />
+          <Property Name="Remaining_Amount" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Processed_BrewingMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Processed_BrewingMaster">
+          <Key>
+            <PropertyRef Name="Recipeid" />
+          </Key>
+          <Property Name="Recipeid" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="ProductionPrice" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Recipe_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Recipe_Report">
+          <Key>
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="TotalQuantityProduced" />
+            <PropertyRef Name="RemainingQuantity" />
+            <PropertyRef Name="ProductionPrice" />
+            <PropertyRef Name="TotalOrders" />
+            <PropertyRef Name="TotalQuantityOrdered" />
+            <PropertyRef Name="TotalOrderCost" />
+          </Key>
+          <Property Name="Recipeid" Type="int" Nullable="false" />
+          <Property Name="RecipeName" Type="nvarchar(max)" />
+          <Property Name="TotalQuantityProduced" Type="float" Nullable="false" />
+          <Property Name="RemainingQuantity" Type="float" Nullable="false" />
+          <Property Name="ProductionPrice" Type="float" Nullable="false" />
+          <Property Name="TotalOrders" Type="int" Nullable="false" />
+          <Property Name="TotalQuantityOrdered" Type="float" Nullable="false" />
+          <Property Name="TotalOrderCost" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Stock_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Stock_Report">
+          <Key>
+            <PropertyRef Name="Ingredient_Id" />
+          </Key>
+          <Property Name="Ingredient_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ingredient_Name" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="CommonDBModelStoreContainer">
+          <EntitySet Name="vw_Brewing_Blotter" EntityType="Self.vw_Brewing_Blotter" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Brewing_Blotter].[BrewingId] AS [BrewingId], 
+    [vw_Brewing_Blotter].[Recipeid] AS [Recipeid], 
+    [vw_Brewing_Blotter].[RecipeName] AS [RecipeName], 
+    [vw_Brewing_Blotter].[Quantity] AS [Quantity], 
+    [vw_Brewing_Blotter].[ProductionCost] AS [ProductionCost], 
+    [vw_Brewing_Blotter].[BrewingTime] AS [BrewingTime], 
+    [vw_Brewing_Blotter].[Processed_YN] AS [Processed_YN]
+    FROM [dbo].[vw_Brewing_Blotter] AS [vw_Brewing_Blotter]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Employee_Report" EntityType="Self.vw_Employee_Report" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Employee_Report].[EmployeeID] AS [EmployeeID], 
+    [vw_Employee_Report].[EmployeeName] AS [EmployeeName], 
+    [vw_Employee_Report].[TotalOrders] AS [TotalOrders], 
+    [vw_Employee_Report].[TotalOrderAmount] AS [TotalOrderAmount], 
+    [vw_Employee_Report].[TotalMargin] AS [TotalMargin], 
+    [vw_Employee_Report].[TotalMargin_Amount] AS [TotalMargin_Amount]
+    FROM [dbo].[vw_Employee_Report] AS [vw_Employee_Report]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Order_Blotter" EntityType="Self.vw_Order_Blotter" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Order_Blotter].[OrderId] AS [OrderId], 
+    [vw_Order_Blotter].[Recipeid] AS [Recipeid], 
+    [vw_Order_Blotter].[RecipeName] AS [RecipeName], 
+    [vw_Order_Blotter].[Order_Quantity] AS [Order_Quantity], 
+    [vw_Order_Blotter].[Production_Price] AS [Production_Price], 
+    [vw_Order_Blotter].[Production_Cost] AS [Production_Cost], 
+    [vw_Order_Blotter].[Customer_Price] AS [Customer_Price], 
+    [vw_Order_Blotter].[Customer_Cost] AS [Customer_Cost], 
+    [vw_Order_Blotter].[GST] AS [GST], 
+    [vw_Order_Blotter].[Margin] AS [Margin], 
+    [vw_Order_Blotter].[Trasportation_Cost] AS [Trasportation_Cost], 
+    [vw_Order_Blotter].[Sales_Person] AS [Sales_Person], 
+    [vw_Order_Blotter].[Customer_Restaurant_Details] AS [Customer_Restaurant_Details], 
+    [vw_Order_Blotter].[Remark] AS [Remark], 
+    [vw_Order_Blotter].[Created_At] AS [Created_At], 
+    [vw_Order_Blotter].[Created_By] AS [Created_By], 
+    [vw_Order_Blotter].[Amount_Paid] AS [Amount_Paid], 
+    [vw_Order_Blotter].[Remaining_Amount] AS [Remaining_Amount]
+    FROM [dbo].[vw_Order_Blotter] AS [vw_Order_Blotter]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Processed_BrewingMaster" EntityType="Self.vw_Processed_BrewingMaster" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Processed_BrewingMaster].[Recipeid] AS [Recipeid], 
+    [vw_Processed_BrewingMaster].[Quantity] AS [Quantity], 
+    [vw_Processed_BrewingMaster].[ProductionPrice] AS [ProductionPrice]
+    FROM [dbo].[vw_Processed_BrewingMaster] AS [vw_Processed_BrewingMaster]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Recipe_Report" EntityType="Self.vw_Recipe_Report" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Recipe_Report].[Recipeid] AS [Recipeid], 
+    [vw_Recipe_Report].[RecipeName] AS [RecipeName], 
+    [vw_Recipe_Report].[TotalQuantityProduced] AS [TotalQuantityProduced], 
+    [vw_Recipe_Report].[RemainingQuantity] AS [RemainingQuantity], 
+    [vw_Recipe_Report].[ProductionPrice] AS [ProductionPrice], 
+    [vw_Recipe_Report].[TotalOrders] AS [TotalOrders], 
+    [vw_Recipe_Report].[TotalQuantityOrdered] AS [TotalQuantityOrdered], 
+    [vw_Recipe_Report].[TotalOrderCost] AS [TotalOrderCost]
+    FROM [dbo].[vw_Recipe_Report] AS [vw_Recipe_Report]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Stock_Report" EntityType="Self.vw_Stock_Report" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Stock_Report].[Ingredient_Id] AS [Ingredient_Id], 
+    [vw_Stock_Report].[Ingredient_Name] AS [Ingredient_Name], 
+    [vw_Stock_Report].[Quantity] AS [Quantity], 
+    [vw_Stock_Report].[Price] AS [Price]
+    FROM [dbo].[vw_Stock_Report] AS [vw_Stock_Report]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vw_Brewing_Blotter">
+          <Key>
+            <PropertyRef Name="BrewingId" />
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductionCost" />
+            <PropertyRef Name="BrewingTime" />
+          </Key>
+          <Property Name="BrewingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recipeid" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="ProductionCost" Type="Double" Nullable="false" />
+          <Property Name="BrewingTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Processed_YN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_Employee_Report">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="TotalOrders" />
+            <PropertyRef Name="TotalOrderAmount" />
+            <PropertyRef Name="TotalMargin" />
+            <PropertyRef Name="TotalMargin_Amount" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+          <Property Name="TotalOrderAmount" Type="Double" Nullable="false" />
+          <Property Name="TotalMargin" Type="Double" Nullable="false" />
+          <Property Name="TotalMargin_Amount" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_Order_Blotter">
+          <Key>
+            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="Order_Quantity" />
+            <PropertyRef Name="Production_Price" />
+            <PropertyRef Name="Production_Cost" />
+            <PropertyRef Name="Customer_Price" />
+            <PropertyRef Name="Customer_Cost" />
+            <PropertyRef Name="GST" />
+            <PropertyRef Name="Margin" />
+            <PropertyRef Name="Trasportation_Cost" />
+            <PropertyRef Name="Created_At" />
+            <PropertyRef Name="Amount_Paid" />
+            <PropertyRef Name="Remaining_Amount" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Recipeid" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Order_Quantity" Type="Double" Nullable="false" />
+          <Property Name="Production_Price" Type="Double" Nullable="false" />
+          <Property Name="Production_Cost" Type="Double" Nullable="false" />
+          <Property Name="Customer_Price" Type="Double" Nullable="false" />
+          <Property Name="Customer_Cost" Type="Double" Nullable="false" />
+          <Property Name="GST" Type="Double" Nullable="false" />
+          <Property Name="Margin" Type="Double" Nullable="false" />
+          <Property Name="Trasportation_Cost" Type="Double" Nullable="false" />
+          <Property Name="Sales_Person" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_Restaurant_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount_Paid" Type="Double" Nullable="false" />
+          <Property Name="Remaining_Amount" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_Processed_BrewingMaster">
+          <Key>
+            <PropertyRef Name="Recipeid" />
+          </Key>
+          <Property Name="Recipeid" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="ProductionPrice" Type="Double" />
+        </EntityType>
+        <EntityType Name="vw_Recipe_Report">
+          <Key>
+            <PropertyRef Name="Recipeid" />
+            <PropertyRef Name="TotalQuantityProduced" />
+            <PropertyRef Name="RemainingQuantity" />
+            <PropertyRef Name="ProductionPrice" />
+            <PropertyRef Name="TotalOrders" />
+            <PropertyRef Name="TotalQuantityOrdered" />
+            <PropertyRef Name="TotalOrderCost" />
+          </Key>
+          <Property Name="Recipeid" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalQuantityProduced" Type="Double" Nullable="false" />
+          <Property Name="RemainingQuantity" Type="Double" Nullable="false" />
+          <Property Name="ProductionPrice" Type="Double" Nullable="false" />
+          <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+          <Property Name="TotalQuantityOrdered" Type="Double" Nullable="false" />
+          <Property Name="TotalOrderCost" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_Stock_Report">
+          <Key>
+            <PropertyRef Name="Ingredient_Id" />
+          </Key>
+          <Property Name="Ingredient_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ingredient_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CommonDBEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vw_Brewing_Blotter" EntityType="Self.vw_Brewing_Blotter" />
+          <EntitySet Name="vw_Employee_Report" EntityType="Self.vw_Employee_Report" />
+          <EntitySet Name="vw_Order_Blotter" EntityType="Self.vw_Order_Blotter" />
+          <EntitySet Name="vw_Processed_BrewingMaster" EntityType="Self.vw_Processed_BrewingMaster" />
+          <EntitySet Name="vw_Recipe_Report" EntityType="Self.vw_Recipe_Report" />
+          <EntitySet Name="vw_Stock_Report" EntityType="Self.vw_Stock_Report" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommonDBModelStoreContainer" CdmEntityContainer="CommonDBEntities7">
+          <EntitySetMapping Name="vw_Brewing_Blotter">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Brewing_Blotter">
+              <MappingFragment StoreEntitySet="vw_Brewing_Blotter">
+                <ScalarProperty Name="BrewingId" ColumnName="BrewingId" />
+                <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductionCost" ColumnName="ProductionCost" />
+                <ScalarProperty Name="BrewingTime" ColumnName="BrewingTime" />
+                <ScalarProperty Name="Processed_YN" ColumnName="Processed_YN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Employee_Report">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Employee_Report">
+              <MappingFragment StoreEntitySet="vw_Employee_Report">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+                <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+                <ScalarProperty Name="TotalMargin" ColumnName="TotalMargin" />
+                <ScalarProperty Name="TotalMargin_Amount" ColumnName="TotalMargin_Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Order_Blotter">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Order_Blotter">
+              <MappingFragment StoreEntitySet="vw_Order_Blotter">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+                <ScalarProperty Name="Production_Price" ColumnName="Production_Price" />
+                <ScalarProperty Name="Production_Cost" ColumnName="Production_Cost" />
+                <ScalarProperty Name="Customer_Price" ColumnName="Customer_Price" />
+                <ScalarProperty Name="Customer_Cost" ColumnName="Customer_Cost" />
+                <ScalarProperty Name="GST" ColumnName="GST" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="Trasportation_Cost" ColumnName="Trasportation_Cost" />
+                <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+                <ScalarProperty Name="Customer_Restaurant_Details" ColumnName="Customer_Restaurant_Details" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Amount_Paid" ColumnName="Amount_Paid" />
+                <ScalarProperty Name="Remaining_Amount" ColumnName="Remaining_Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Processed_BrewingMaster">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Processed_BrewingMaster">
+              <MappingFragment StoreEntitySet="vw_Processed_BrewingMaster">
+                <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Recipe_Report">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Recipe_Report">
+              <MappingFragment StoreEntitySet="vw_Recipe_Report">
+                <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="TotalQuantityProduced" ColumnName="TotalQuantityProduced" />
+                <ScalarProperty Name="RemainingQuantity" ColumnName="RemainingQuantity" />
+                <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
+                <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+                <ScalarProperty Name="TotalQuantityOrdered" ColumnName="TotalQuantityOrdered" />
+                <ScalarProperty Name="TotalOrderCost" ColumnName="TotalOrderCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Stock_Report">
+            <EntityTypeMapping TypeName="CommonDBModel.vw_Stock_Report">
+              <MappingFragment StoreEntitySet="vw_Stock_Report">
+                <ScalarProperty Name="Ingredient_Id" ColumnName="Ingredient_Id" />
+                <ScalarProperty Name="Ingredient_Name" ColumnName="Ingredient_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

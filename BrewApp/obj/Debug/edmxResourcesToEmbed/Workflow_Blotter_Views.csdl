@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="vw_Brewing_Blotter">
+    <Key>
+      <PropertyRef Name="BrewingId" />
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="ProductionPrice" />
+      <PropertyRef Name="BrewingTime" />
+    </Key>
+    <Property Name="BrewingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Recipeid" Type="Int32" Nullable="false" />
+    <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Double" Nullable="false" />
+    <Property Name="ProductionPrice" Type="Double" Nullable="false" />
+    <Property Name="BrewingTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Processed_YN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Order_Blotter">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="Order_Quantity" />
+      <PropertyRef Name="Production_Price" />
+      <PropertyRef Name="Production_Cost" />
+      <PropertyRef Name="Customer_Price" />
+      <PropertyRef Name="Customer_Cost" />
+      <PropertyRef Name="GST" />
+      <PropertyRef Name="Margin" />
+      <PropertyRef Name="Trasportation_Cost" />
+      <PropertyRef Name="Created_At" />
+      <PropertyRef Name="Amount_Paid" />
+      <PropertyRef Name="Remaining_Amount" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="Recipeid" Type="Int32" Nullable="false" />
+    <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Order_Quantity" Type="Double" Nullable="false" />
+    <Property Name="Production_Price" Type="Double" Nullable="false" />
+    <Property Name="Production_Cost" Type="Double" Nullable="false" />
+    <Property Name="Customer_Price" Type="Double" Nullable="false" />
+    <Property Name="Customer_Cost" Type="Double" Nullable="false" />
+    <Property Name="GST" Type="Double" Nullable="false" />
+    <Property Name="Margin" Type="Double" Nullable="false" />
+    <Property Name="Trasportation_Cost" Type="Double" Nullable="false" />
+    <Property Name="Sales_Person" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Restaurant_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount_Paid" Type="Double" Nullable="false" />
+    <Property Name="Remaining_Amount" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CommonDBEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="vw_Brewing_Blotter" EntityType="Self.vw_Brewing_Blotter" />
+    <EntitySet Name="vw_Order_Blotter" EntityType="Self.vw_Order_Blotter" />
+    <EntitySet Name="vw_Employee_Report" EntityType="CommonDBModel1.vw_Employee_Report" />
+    <EntitySet Name="vw_Stock_Report" EntityType="CommonDBModel1.vw_Stock_Report" />
+    <EntitySet Name="vw_Recipe_Report" EntityType="CommonDBModel1.vw_Recipe_Report" />
+    <EntitySet Name="vw_Processed_BrewingMaster" EntityType="CommonDBModel1.vw_Processed_BrewingMaster" />
+  </EntityContainer>
+  <EntityType Name="vw_Employee_Report">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="TotalOrders" />
+      <PropertyRef Name="TotalOrderAmount" />
+      <PropertyRef Name="TotalMargin" />
+      <PropertyRef Name="TotalMargin_Amount" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+    <Property Name="TotalOrderAmount" Type="Double" Nullable="false" />
+    <Property Name="TotalMargin" Type="Double" Nullable="false" />
+    <Property Name="TotalMargin_Amount" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_Stock_Report">
+    <Key>
+      <PropertyRef Name="Ingredient_Id" />
+    </Key>
+    <Property Name="Ingredient_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ingredient_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Recipe_Report">
+    <Key>
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="TotalQuantityProduced" />
+      <PropertyRef Name="RemainingQuantity" />
+      <PropertyRef Name="ProductionCost" />
+      <PropertyRef Name="TotalOrders" />
+      <PropertyRef Name="TotalQuantityOrdered" />
+      <PropertyRef Name="TotalOrderCost" />
+    </Key>
+    <Property Name="Recipeid" Type="Int32" Nullable="false" />
+    <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TotalQuantityProduced" Type="Double" Nullable="false" />
+    <Property Name="RemainingQuantity" Type="Double" Nullable="false" />
+    <Property Name="ProductionCost" Type="Double" Nullable="false" />
+    <Property Name="TotalOrders" Type="Int32" Nullable="false" />
+    <Property Name="TotalQuantityOrdered" Type="Double" Nullable="false" />
+    <Property Name="TotalOrderCost" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_Processed_BrewingMaster">
+    <Key>
+      <PropertyRef Name="Recipeid" />
+    </Key>
+    <Property Name="Recipeid" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="ProductionCost" Type="Double" />
+  </EntityType>
+</Schema>

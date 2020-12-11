@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="vw_Order_Blotter">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="Order_Quantity" />
+      <PropertyRef Name="Production_Price" />
+      <PropertyRef Name="Production_Cost" />
+      <PropertyRef Name="Customer_Price" />
+      <PropertyRef Name="Customer_Cost" />
+      <PropertyRef Name="GST" />
+      <PropertyRef Name="Margin" />
+      <PropertyRef Name="Trasportation_Cost" />
+      <PropertyRef Name="Created_At" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Recipeid" Type="Int32" Nullable="false" />
+    <Property Name="RecipeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Order_Quantity" Type="Double" Nullable="false" />
+    <Property Name="Production_Price" Type="Double" Nullable="false" />
+    <Property Name="Production_Cost" Type="Double" Nullable="false" />
+    <Property Name="Customer_Price" Type="Double" Nullable="false" />
+    <Property Name="Customer_Cost" Type="Double" Nullable="false" />
+    <Property Name="GST" Type="Double" Nullable="false" />
+    <Property Name="Margin" Type="Double" Nullable="false" />
+    <Property Name="Trasportation_Cost" Type="Double" Nullable="false" />
+    <Property Name="Sales_Person" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Customer_Restaurant_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Created_By" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="CommonDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="vw_Order_Blotter" EntityType="Self.vw_Order_Blotter" />
+  </EntityContainer>
+</Schema>

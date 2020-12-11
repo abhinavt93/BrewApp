@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Order_Blotter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Order_Blotter">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="Order_Quantity" />
+      <PropertyRef Name="Production_Price" />
+      <PropertyRef Name="Production_Cost" />
+      <PropertyRef Name="Customer_Price" />
+      <PropertyRef Name="Customer_Cost" />
+      <PropertyRef Name="GST" />
+      <PropertyRef Name="Margin" />
+      <PropertyRef Name="Trasportation_Cost" />
+      <PropertyRef Name="Created_At" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Recipeid" Type="int" Nullable="false" />
+    <Property Name="RecipeName" Type="nvarchar(max)" />
+    <Property Name="Order_Quantity" Type="float" Nullable="false" />
+    <Property Name="Production_Price" Type="float" Nullable="false" />
+    <Property Name="Production_Cost" Type="float" Nullable="false" />
+    <Property Name="Customer_Price" Type="float" Nullable="false" />
+    <Property Name="Customer_Cost" Type="float" Nullable="false" />
+    <Property Name="GST" Type="float" Nullable="false" />
+    <Property Name="Margin" Type="float" Nullable="false" />
+    <Property Name="Trasportation_Cost" Type="float" Nullable="false" />
+    <Property Name="Sales_Person" Type="nvarchar(max)" />
+    <Property Name="Customer_Restaurant_Details" Type="nvarchar(max)" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="Created_At" Type="datetime" Nullable="false" />
+    <Property Name="Created_By" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="CommonDBModelStoreContainer">
+    <EntitySet Name="vw_Order_Blotter" EntityType="Self.vw_Order_Blotter" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Order_Blotter].[OrderId] AS [OrderId], 
+    [vw_Order_Blotter].[Recipeid] AS [Recipeid], 
+    [vw_Order_Blotter].[RecipeName] AS [RecipeName], 
+    [vw_Order_Blotter].[Order_Quantity] AS [Order_Quantity], 
+    [vw_Order_Blotter].[Production_Price] AS [Production_Price], 
+    [vw_Order_Blotter].[Production_Cost] AS [Production_Cost], 
+    [vw_Order_Blotter].[Customer_Price] AS [Customer_Price], 
+    [vw_Order_Blotter].[Customer_Cost] AS [Customer_Cost], 
+    [vw_Order_Blotter].[GST] AS [GST], 
+    [vw_Order_Blotter].[Margin] AS [Margin], 
+    [vw_Order_Blotter].[Trasportation_Cost] AS [Trasportation_Cost], 
+    [vw_Order_Blotter].[Sales_Person] AS [Sales_Person], 
+    [vw_Order_Blotter].[Customer_Restaurant_Details] AS [Customer_Restaurant_Details], 
+    [vw_Order_Blotter].[Remark] AS [Remark], 
+    [vw_Order_Blotter].[Created_At] AS [Created_At], 
+    [vw_Order_Blotter].[Created_By] AS [Created_By]
+    FROM [dbo].[vw_Order_Blotter] AS [vw_Order_Blotter]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

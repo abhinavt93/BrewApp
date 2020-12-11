@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CommonDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Employee_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Employee_Report">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="TotalOrders" />
+      <PropertyRef Name="TotalOrderAmount" />
+      <PropertyRef Name="TotalMargin" />
+      <PropertyRef Name="TotalMargin_Amount" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar(max)" />
+    <Property Name="TotalOrders" Type="int" Nullable="false" />
+    <Property Name="TotalOrderAmount" Type="float" Nullable="false" />
+    <Property Name="TotalMargin" Type="float" Nullable="false" />
+    <Property Name="TotalMargin_Amount" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Recipe_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Recipe_Report">
+    <Key>
+      <PropertyRef Name="Recipeid" />
+      <PropertyRef Name="TotalAmount" />
+      <PropertyRef Name="ProductionPrice" />
+    </Key>
+    <Property Name="Recipeid" Type="int" Nullable="false" />
+    <Property Name="RecipeName" Type="nvarchar(max)" />
+    <Property Name="TotalAmount" Type="float" Nullable="false" />
+    <Property Name="RemainingAmount" Type="float" />
+    <Property Name="ProductionPrice" Type="float" Nullable="false" />
+    <Property Name="TotalOrders" Type="int" />
+    <Property Name="TotalOrderAmount" Type="float" />
+    <Property Name="TotalOrderPrice" Type="float" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CommonDB.dbo.vw_Stock_Report' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_Stock_Report">
+    <Key>
+      <PropertyRef Name="Ingredient_Id" />
+    </Key>
+    <Property Name="Ingredient_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ingredient_Name" Type="nvarchar(max)" />
+    <Property Name="Quantity" Type="nvarchar(max)" />
+    <Property Name="Price" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="CommonDBModelStoreContainer">
+    <EntitySet Name="vw_Employee_Report" EntityType="Self.vw_Employee_Report" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Employee_Report].[EmployeeID] AS [EmployeeID], 
+    [vw_Employee_Report].[EmployeeName] AS [EmployeeName], 
+    [vw_Employee_Report].[TotalOrders] AS [TotalOrders], 
+    [vw_Employee_Report].[TotalOrderAmount] AS [TotalOrderAmount], 
+    [vw_Employee_Report].[TotalMargin] AS [TotalMargin], 
+    [vw_Employee_Report].[TotalMargin_Amount] AS [TotalMargin_Amount]
+    FROM [dbo].[vw_Employee_Report] AS [vw_Employee_Report]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Recipe_Report" EntityType="Self.vw_Recipe_Report" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Recipe_Report].[Recipeid] AS [Recipeid], 
+    [vw_Recipe_Report].[RecipeName] AS [RecipeName], 
+    [vw_Recipe_Report].[TotalAmount] AS [TotalAmount], 
+    [vw_Recipe_Report].[RemainingAmount] AS [RemainingAmount], 
+    [vw_Recipe_Report].[ProductionPrice] AS [ProductionPrice], 
+    [vw_Recipe_Report].[TotalOrders] AS [TotalOrders], 
+    [vw_Recipe_Report].[TotalOrderAmount] AS [TotalOrderAmount], 
+    [vw_Recipe_Report].[TotalOrderPrice] AS [TotalOrderPrice]
+    FROM [dbo].[vw_Recipe_Report] AS [vw_Recipe_Report]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_Stock_Report" EntityType="Self.vw_Stock_Report" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_Stock_Report].[Ingredient_Id] AS [Ingredient_Id], 
+    [vw_Stock_Report].[Ingredient_Name] AS [Ingredient_Name], 
+    [vw_Stock_Report].[Quantity] AS [Quantity], 
+    [vw_Stock_Report].[Price] AS [Price]
+    FROM [dbo].[vw_Stock_Report] AS [vw_Stock_Report]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

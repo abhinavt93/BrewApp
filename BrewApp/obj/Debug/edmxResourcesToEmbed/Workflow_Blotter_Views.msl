@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CommonDBModel1StoreContainer" CdmEntityContainer="CommonDBEntities3">
+    <EntitySetMapping Name="vw_Brewing_Blotter">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Brewing_Blotter">
+        <MappingFragment StoreEntitySet="vw_Brewing_Blotter">
+          <ScalarProperty Name="BrewingId" ColumnName="BrewingId" />
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
+          <ScalarProperty Name="BrewingTime" ColumnName="BrewingTime" />
+          <ScalarProperty Name="Processed_YN" ColumnName="Processed_YN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Order_Blotter">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Order_Blotter">
+        <MappingFragment StoreEntitySet="vw_Order_Blotter">
+          <ScalarProperty Name="Remaining_Amount" ColumnName="Remaining_Amount" />
+          <ScalarProperty Name="Amount_Paid" ColumnName="Amount_Paid" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="Order_Quantity" ColumnName="Order_Quantity" />
+          <ScalarProperty Name="Production_Price" ColumnName="Production_Price" />
+          <ScalarProperty Name="Production_Cost" ColumnName="Production_Cost" />
+          <ScalarProperty Name="Customer_Price" ColumnName="Customer_Price" />
+          <ScalarProperty Name="Customer_Cost" ColumnName="Customer_Cost" />
+          <ScalarProperty Name="GST" ColumnName="GST" />
+          <ScalarProperty Name="Margin" ColumnName="Margin" />
+          <ScalarProperty Name="Trasportation_Cost" ColumnName="Trasportation_Cost" />
+          <ScalarProperty Name="Sales_Person" ColumnName="Sales_Person" />
+          <ScalarProperty Name="Customer_Restaurant_Details" ColumnName="Customer_Restaurant_Details" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+          <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Employee_Report">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Employee_Report">
+        <MappingFragment StoreEntitySet="vw_Employee_Report">
+          <ScalarProperty Name="TotalMargin_Amount" ColumnName="TotalMargin_Amount" />
+          <ScalarProperty Name="TotalMargin" ColumnName="TotalMargin" />
+          <ScalarProperty Name="TotalOrderAmount" ColumnName="TotalOrderAmount" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Stock_Report">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Stock_Report">
+        <MappingFragment StoreEntitySet="vw_Stock_Report">
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Ingredient_Name" ColumnName="Ingredient_Name" />
+          <ScalarProperty Name="Ingredient_Id" ColumnName="Ingredient_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Recipe_Report">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Recipe_Report">
+        <MappingFragment StoreEntitySet="vw_Recipe_Report">
+          <ScalarProperty Name="TotalOrderCost" ColumnName="TotalOrderCost" />
+          <ScalarProperty Name="TotalQuantityOrdered" ColumnName="TotalQuantityOrdered" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+          <ScalarProperty Name="ProductionCost" ColumnName="ProductionCost" />
+          <ScalarProperty Name="RemainingQuantity" ColumnName="RemainingQuantity" />
+          <ScalarProperty Name="TotalQuantityProduced" ColumnName="TotalQuantityProduced" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Processed_BrewingMaster">
+      <EntityTypeMapping TypeName="CommonDBModel1.vw_Processed_BrewingMaster">
+        <MappingFragment StoreEntitySet="vw_Processed_BrewingMaster">
+          <ScalarProperty Name="ProductionCost" ColumnName="ProductionCost" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Recipeid" ColumnName="Recipeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

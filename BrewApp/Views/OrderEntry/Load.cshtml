@@ -1,0 +1,497 @@
+﻿@model BrewApp.ViewModel.OrderEntryViewModel
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthML {
+        width: 150px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+
+    .ValidationSummaryHeight {
+        height: 30px;
+        padding-left: 10px;
+    }
+
+    .txtBoxWidth {
+        width: 90px !important;
+    }
+
+    txtBoxWidth1 {
+        width: 150px !important;
+    }
+
+    txtBoxWidth2 {
+        width: 80px !important;
+    }
+
+    .ddlWidth {
+        width: 200px !important;
+        padding-right: 5px;
+    }
+
+
+    .lblWidth {
+        width: 220px !important;
+        padding-left: 14px !important;
+    }
+
+    .lblWidthRightDiv {
+        width: 220px !important;
+        margin-left: 45px !important;
+    }
+
+    .tdWidth {
+        width: 120px;
+    }
+
+    .tblRecipeName {
+        border-bottom: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+    }
+
+    .txtBoxRecipeName {
+        width: 200px !important;
+    }
+
+    #tblRecipeData {
+        margin-top: 10px;
+    }
+
+    .btn {
+        width: 130px;
+        margin-left: 15px;
+        margin-top: 20px;
+    }
+    .trHeight {
+        height:7px;
+    }
+</style>
+
+<h2>Order Entry</h2>
+
+<table>
+
+</table>
+
+@using (Html.BeginForm("Save", "OrderEntry", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+
+    <table>
+        <tr style="margin-top:5px;">
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Recipeid, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            <td>
+                @Html.DropDownListFor(m => m.OrderEntry.Recipeid, new SelectList(Model.OrderRecipeModel.oRecipeMasterDTO, "Id", "RecipeName"), "Select Ingredient", new { @class = "form-control ddlWidth", id = "ddlRecipeName" })
+            </td>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.id, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.id, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtOrder_Id" })
+            </td>
+        </tr>
+        <tr style="display:none">
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.Recipeid, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtRecipeid" })
+            </td>
+
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.RecipeName, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtRecipeName" })
+            </td>
+
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.Production_Cost, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtProduction_Cost" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.Customer_Price, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtCustomer_Price" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.Margin_Amount, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtMargin_Amount" })
+            </td>
+            
+            
+        </tr>
+    </table>
+    
+    <br />
+    <table>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Order_Quantity, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Order_Quantity, new { @Value = "100", @class = "form-control txtBoxWidth1 AlignRight", id = "txtOrderQuantity", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Order_Quantity, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtOrderQuantity", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.IsBlack, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+            <td>
+                @Html.DropDownListFor(m => m.OrderEntry.IsBlack, new SelectList("NY"), new { @class = "form-control txtBoxWidth2 AlignRight", id = "Processed_YN" })
+            </td>
+            
+        </tr>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Sales_Person, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            <td>
+                @Html.DropDownListFor(m => m.OrderEntry.Sales_Person, new SelectList(Model.Employee, "EmployeeID", "EmployeeName"), "Select Sales Person", new { @class = "form-control ddlWidth", id = "ddlSalesPerson" })
+                
+            </td>
+
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Customer_Restaurant_Details, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+
+            <td>
+                @Html.DropDownListFor(m => m.OrderEntry.Customer_Restaurant_Details, new SelectList(Model.Customer, "CustomerID", "CustomerName"), "Select Customer", new { @class = "form-control ddlWidth", id = "ddlCustomer" })
+            </td>
+        </tr>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Remark, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.OrderEntry.Remark, new { @class = "form-control txtBoxWidth1 AlignLeft" })
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <table>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Production_Price, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Production_Price, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", id = "txtProductionPrice", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Production_Price, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtProductionPrice", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.GST, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.GST, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", id = "txtGST", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.GST, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtGST", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            
+        </tr>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Margin, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Margin, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", id = "txtMargin", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Margin, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtMargin", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Trasportation_Cost, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Trasportation_Cost, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", @id = "txtTrasportationCost", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Trasportation_Cost, new { @class = "form-control txtBoxWidth1 AlignRight", @id = "txtTrasportationCost", @onchange = "OnChangeEvent();" })
+                </td>
+            }
+            
+
+        </tr>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Customer_Cost, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Customer_Cost, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", id = "txtCustomerCost", @onchange = "OnCustomerCostChangeEvent();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Customer_Cost, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtCustomerCost", @onchange = "OnCustomerCostChangeEvent();" })
+                </td>
+            }
+            
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Amount_Paid_Now, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid_Now, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", @id = "txtAmount_Paid_Now", @onchange = "OnAmountPaidNowChange();" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid_Now, new { @class = "form-control txtBoxWidth1 AlignRight", @id = "txtAmount_Paid_Now", @onchange = "OnAmountPaidNowChange();" })
+                </td>
+            }
+            
+        </tr>
+        <tr class="trHeight"><td></td><td></td></tr>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Amount_Paid, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid, new { @Value = "0", @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtAmount_Paid" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtAmount_Paid" })
+                </td>
+            }
+           
+            <td>
+                @Html.LabelFor(m => m.OrderEntry.Remaining_Amount, new { @class = "col-md-2 control-label AlignLeft lblWidthRightDiv" })
+            </td>
+
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Remaining_Amount, new { @Value = "0", @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtRemaining_Amount" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Remaining_Amount, new { @readonly = "readonly", @class = "form-control txtBoxWidth1 AlignRight", id = "txtRemaining_Amount" })
+                </td>
+            }
+            
+        </tr>
+        <tr style="display:none">
+            @if (Model.OrderEntry.id == 0)
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid, new { @Value = "0", @class = "form-control txtBoxWidth1 AlignRight", id = "txtAmount_Paid_Temp" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(m => m.OrderEntry.Amount_Paid, new { @class = "form-control txtBoxWidth1 AlignRight", id = "txtAmount_Paid_Temp" })
+                </td>
+            }
+        </tr>
+    </table>
+    if (Model.OrderEntry.id == 0)
+    {
+        <input type="submit" class="btn btn-default btn" id="btnSaveBrewing" value="Place Order" />
+    }
+    else
+    {
+        <input type="submit" class="btn btn-default btn" id="btnSaveBrewing" value="Update" />
+    }
+
+
+}
+
+@section scripts{
+    <script>
+        function OnChangeEvent() {
+            if (document.getElementById('txtOrderQuantity').value != "" && document.getElementById('txtProductionPrice').value != "") {
+                document.getElementById('txtProduction_Cost').value = ((parseFloat(document.getElementById('txtProductionPrice').value)
+                                                                        * parseFloat(document.getElementById('txtOrderQuantity').value))).toFixed(2);
+            }
+            else {
+                document.getElementById('txtProduction_Cost').value = "";
+            }
+
+            if (document.getElementById('txtMargin').value != "" && document.getElementById('txtProduction_Cost').value != "") {
+                document.getElementById('txtMargin_Amount').value = ((parseFloat(document.getElementById('txtProduction_Cost').value)
+                                                                        * (parseFloat(document.getElementById('txtMargin').value) / 100))).toFixed(2);
+            }
+            else {
+                document.getElementById('txtMargin_Amount').value = "";
+            }
+
+            if (document.getElementById('txtProduction_Cost').value != "" && document.getElementById('txtGST').value != "" &&
+                document.getElementById('txtMargin_Amount').value != "" && document.getElementById('txtTrasportationCost').value != "") {
+                document.getElementById('txtCustomerCost').value = (parseFloat(document.getElementById('txtProduction_Cost').value) +
+                                                                        parseFloat(document.getElementById('txtGST').value) +
+                                                                        parseFloat(document.getElementById('txtMargin_Amount').value) +
+                                                                        parseFloat(document.getElementById('txtTrasportationCost').value)).toFixed(2);
+
+                document.getElementById('txtCustomer_Price').value = ((parseFloat(document.getElementById('txtCustomerCost').value)) 
+                                                                       / parseFloat(document.getElementById('txtOrderQuantity').value)).toFixed(2);
+            }
+            else {
+                document.getElementById('txtCustomerCost').value = "";
+                document.getElementById('txtCustomer_Price').value = "";
+            }
+            OnAmountPaidNowChange();
+        }
+
+        function OnCustomerCostChangeEvent() {
+            if (document.getElementById('txtCustomerCost').value != "")
+            {
+                document.getElementById('txtProduction_Cost').value = (parseFloat(document.getElementById('txtCustomerCost').value) -
+                                                                        parseFloat(document.getElementById('txtGST').value) -
+                                                                        parseFloat(document.getElementById('txtMargin_Amount').value) -
+                                                                        parseFloat(document.getElementById('txtTrasportationCost').value)).toFixed(2);
+
+                document.getElementById('txtProductionPrice').value = ((parseFloat(document.getElementById('txtProduction_Cost').value))
+                                                                       / parseFloat(document.getElementById('txtOrderQuantity').value)).toFixed(2);
+            }
+            OnAmountPaidNowChange();
+        }
+
+        function OnAmountPaidNowChange() {
+            
+            document.getElementById('txtAmount_Paid').value = (parseFloat(document.getElementById('txtAmount_Paid_Temp').value) +
+                                                                        parseFloat(document.getElementById('txtAmount_Paid_Now').value)).toFixed(2);
+
+            document.getElementById('txtRemaining_Amount').value = (parseFloat(document.getElementById('txtCustomerCost').value) -
+                                                                        parseFloat(document.getElementById('txtAmount_Paid').value) ).toFixed(2);
+        }
+
+        $(document).ready(function () {
+
+            $("#ddlRecipeName").change(function (evt) {
+                var DropDownSelectedVal = $("#ddlRecipeName :selected").val();
+
+                if (DropDownSelectedVal != null && DropDownSelectedVal != '') {
+                    $.ajax({
+
+                        url: "/BrewApp/OrderEntry/GetRecipeDetails",
+                        type: 'POST',
+                        data: { "Id": DropDownSelectedVal },
+                        dataType: 'json',
+                        success: function (response) {
+                            $("#txtRecipeName").val(response.RecipeName);
+                            $("#txtRecipeid").val(response.Id);
+                            $("#txtProductionPrice").val(response.ProductionPrice.toFixed(2));
+                            OnChangeEvent();
+                            OnAmountPaidNowChange();
+                        },
+
+                        error: function (xhr) {
+                            alert("Recipe is in brewing stage.");
+                        }
+
+                    });
+
+                }
+                else {
+                    $("#txtRecipeName").val('');
+                    $("#txtRecipeid").val('');
+                    $("#txtProductionPrice").val('');
+                }
+
+            });
+
+        });
+
+
+    </script>
+}
+
+
+
+

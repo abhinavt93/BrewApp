@@ -1,0 +1,142 @@
+﻿@model IEnumerable<BrewApp.DTOs.KegDTO>
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .AlignCenter{
+        text-align: center !important;
+    }
+    .AlignLeft{
+        text-align: left !important;
+    }
+    .AlignRight{
+        text-align: right !important;
+    }
+
+    .ColWidthL
+    {
+        width:200px !important;
+    }
+    .ColWidthM
+    {
+        width:100px !important;
+    }
+    .ColWidthS
+    {
+        width:20px !important;
+    }
+    .btnUpdate
+    {
+        width:130px;
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+    #btnUpdate {
+      cursor: pointer;
+      -webkit-appearance: button;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <h2>Keg Master</h2>
+
+    <th class="AlignCenter">@Html.ActionLink("Add Keg", "UpdateOrAdd", new { id = "" }, new { @class = "btn btnUpdate" })</th>
+
+    <table id="tblKegs" class="table" style="width: max-content;">
+        <thead>
+            <tr>
+                <th class="ColWidthS"></th>
+                <th class="ColWidthS"></th>
+                <th class="AlignCenter ColWidthL">Keg Number</th>
+                <th class="AlignCenter ColWidthL">Current Location</th>
+                <th class="AlignCenter ColWidthL">Previous Location</th>
+                <th class="AlignCenter ColWidthL">Last Updated At</th>
+                <th class="AlignCenter ColWidthL">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var item in Model)
+                {
+                    <tr>
+                        <th class="AlignCenter">@Html.ActionLink("Update", "UpdateOrAdd", new { id = item.KegID })</th>
+                        <td class="AlignCenter">@item.KegID</td>
+                        <td class="AlignLeft">@item.KegName</td>
+                        <td class="AlignLeft">@item.FatherName</td>
+                        <td class="AlignLeft">@item.MotherName</td>
+                        <td class="AlignLeft">@item.MobNo</td>
+                        <td class="AlignLeft">@item.Email</td>
+                        <td class="AlignRight">@item.Salary</td>
+                        <td class="AlignLeft">@item.PAN</td>
+                        <td class="AlignLeft">@item.CurrentAddress</td>
+                        <td class="AlignLeft">@item.PermanentAddress</td>
+                        <td class="AlignCenter">@item.DOB.ToString("dd-MMM-yyyy").Replace("01-Jan-1900", "-")</td>
+                    </tr>
+                }*@
+        </tbody>
+    </table>
+
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+
+
+        $("#tblKegs").DataTable({
+            ajax: {
+                url: "/BrewApp/api/KegsAPI",
+                dataSrc: ""
+            },
+            columns: [
+                {
+                    data: "kegID",
+                    render: function(data, type, keg){
+                        return "<a href='/BrewApp/Kegs/UpdateOrAdd/" + data + "'>Update</a> ";
+                    }
+                },
+                {
+                    data: "kegID",
+                    render: function(data, type, keg){
+                        return "<button class='btn-link js-delete' data-keg-id= '" + data + "'>Delete</button> ";
+                    }
+                },
+                { data: "kegNumber" },
+                { data: "currentLocation" },
+                { data: "previousLocation" },
+                { data: "lastUpdatedAt" },
+                { data: "createdAt" }
+                //,{data: "dob"}
+            ]
+
+
+        });
+        
+        $("#tblKegs").on("click", ".js-delete", function () {
+
+            if (confirm("Are you sure you want to delete this record?"))
+            {
+                console.log("awesome");
+            
+                $.ajax({
+                    url: "/BreApp/api/KegAPI/" + $(this).attr("data-keg-id") + "",
+                    method: "DELETE",
+                    success: function () {
+                        console.log("Done");
+                    }
+                })
+            }
+        });
+
+
+    });
+</script>
+}
+  
+
+
+

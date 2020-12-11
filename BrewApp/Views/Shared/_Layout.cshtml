@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pune Beer Farm</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { @class = "navbar-brand" })
+            </div>
+            @*<div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Employee Master", "Load", "Employees")</li>
+                    <li>@Html.ActionLink("Stock Entry", "Load", "Stock")</li>
+                    <li>@Html.ActionLink("Recipe Master", "Load", "Recipe")</li>
+                    <li>@Html.ActionLink("Brewing Entry", "Load", "Brewing")</li>
+                    <li>@Html.ActionLink("Order Entry", "Load", "OrderEntry")</li>
+                    <li>@Html.ActionLink("Workflow", "Load", "Workflow")</li>
+
+                </ul>
+                
+                 @Html.Partial("_LoginPartial")
+            </div>*@
+
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav" style="font-weight:bold;">
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Static<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Employee Master", "Load", "Employees")</li>
+                            <li>@Html.ActionLink("Customer Master", "Load", "Customers")</li>
+                            <li>@Html.ActionLink("Recipe Master", "Load", "Recipe")</li>
+                            <li>@Html.ActionLink("Keg Master", "Load", "Kegs")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entry<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Stock Entry", "Load", "Stock")</li>
+                            <li>@Html.ActionLink("Brewing Entry", "Load", "Brewing")</li>
+                            <li>@Html.ActionLink("Order Entry", "Load", "OrderEntry")</li>
+                            <li>@Html.ActionLink("Expense Entry", "Load", "Expense")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Workflow<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Order Blotter", "Load", "OrderBlotter")</li>
+                            <li>@Html.ActionLink("Brewing Blotter", "Load", "BrewingBlotter")</li>
+                        </ul>
+                    </li>
+                    @*<li>@Html.ActionLink("Workflow", "Load", "Workflow")</li>*@
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @*<li>@Html.ActionLink("Stock Report", "Load", "StockReport")</li>*@
+                            <li>@Html.ActionLink("Inventory Report", "Load", "RecipeReport")</li>
+                            <li>@Html.ActionLink("Employee Report", "Load", "EmployeeReport")</li>
+                            <li>@Html.ActionLink("Income Statement", "Load", "IncomeStatement")</li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Time: @DateTime.Now.ToString("dd-MMM-yyyy hh:mm:sss tt")</p>
+        </footer>
+    </div>
+        
+    @Scripts.Render("~/bundles/lib")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

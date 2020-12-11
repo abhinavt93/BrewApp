@@ -1,0 +1,176 @@
+﻿@model BrewApp.ViewModel.EmployeeReportViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .AlignCenter {
+        text-align: center !important;
+    }
+
+    .AlignLeft {
+        text-align: left !important;
+    }
+
+    .AlignRight {
+        text-align: right !important;
+    }
+
+    .ColWidthXL {
+        width: 300px !important;
+    }
+
+    .ColWidthL {
+        width: 200px !important;
+    }
+
+    .ColWidthML {
+        width: 150px !important;
+    }
+
+    .ColWidthM {
+        width: 100px !important;
+    }
+
+    .ColWidthS {
+        width: 20px !important;
+    }
+
+    .cssHeight {
+        height: 60px;
+    }
+
+    .ValidationSummaryHeight {
+        height: 30px;
+        padding-left: 10px;
+    }
+
+    .txtBoxWidth {
+        width: 90px !important;
+    }
+
+    txtBoxWidth1 {
+        width: 150px !important;
+    }
+
+    txtBoxWidth2 {
+        width: 80px !important;
+    }
+
+    .ddlWidth {
+        width: 200px !important;
+        padding-right: 5px;
+    }
+
+
+    .lblWidth {
+        width: 80px !important;
+    }
+
+    .lblWidth1 {
+        width: 160px !important;
+        padding-left: 20px !important;
+    }
+
+    .tdWidth {
+        width: 120px;
+    }
+
+    .tblRecipeName {
+        border-bottom: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        border-right: 1px solid #dddddd;
+    }
+
+    .txtBoxRecipeName {
+        width: 200px !important;
+    }
+
+    #tblRecipeData {
+        margin-top: 10px;
+    }
+
+    /*.btn {
+        width: 130px;
+        margin-left: 15px;
+        margin-top: 20px;
+    }*/
+
+    .txtBoxWidth3 {
+        width: 50px !important;
+    }
+
+</style>
+
+<h2>Employee Report</h2>
+
+@using (Html.BeginForm("GetRefIdDetails", "EmployeeReport", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    <hr />
+
+    <table>
+        <tr>
+
+            <td>
+                @Html.LabelFor(m => m.RefID, new { @class = "col-md-2 control-label AlignLeft lblWidth" })
+            </td>
+
+            <td>
+                @Html.TextBoxFor(m => m.RefID, new { @class = "form-control txtBoxWidth2 AlignRight", id = "txtRefID" })
+            </td>
+
+            <td>
+                <input type="submit" class="btn btn-default btn" id="btnSearch" value="Search" />
+            </td>
+
+            <td>
+                @Html.LabelFor(m => m.RecordPerPage, new { @class = "col-md-2 control-label AlignLeft lblWidth1" })
+            </td>
+
+            <td>
+                @Html.TextBoxFor(m => m.RecordPerPage, new { @class = "form-control txtBoxWidth3 AlignRight", id = "txtRefID" })
+            </td>
+
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <table id="tblEmployeeReport" class="table">
+        <thead>
+            <tr>
+                <th class="AlignCenter ColWidthM">ID</th>
+                <th class="AlignCenter ColWidthL">Employee Name</th>
+                <th class="AlignCenter ColWidthL">Total Orders</th>
+                <th class="AlignCenter ColWidthL">Total Order Quantity</th>
+                <th class="AlignCenter ColWidthL">Total Margin (%)</th>
+                <th class="AlignCenter ColWidthL">Total Margin Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model.EmployeeReport)
+            {
+                <tr>
+                    <td class="AlignCenter">@employee.EmployeeID</td>
+                    <td class="AlignLeft">@employee.EmployeeName</td>
+                    <td class="AlignRight">@employee.TotalOrders</td>
+                    <td class="AlignRight">@(Math.Round(employee.TotalOrderAmount, 2))</td>
+                    <td class="AlignRight">@(Math.Round(employee.TotalMargin, 2))</td>
+                    <td class="AlignRight">@(Math.Round(employee.TotalMargin_Amount, 2))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="StockReportPaginationDiv">
+        @Html.PagedListPager(Model.EmployeeReport, page => Url.Action("Load", new { page }))
+    </div>
+
+}
